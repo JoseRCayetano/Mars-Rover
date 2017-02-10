@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mars Rover kart</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="./css/rover.css">
+        <script type="text/javascript" src="./js/tablero.js"></script>
+        <script type="text/javascript" src="./js/rover.js"></script>
+        <script>            
+            //Función para buscar si el boton esta activado comprobando la clase
+            function hasClass (elem, klass){
+                return (" "+elem.className + " ").indexOf(" "+klass+" ") > -1;
+            }
+            function cambiar_rumbo (id,rumbo){
+                var boton =document.getElementById(id);
+               if (!hasClass(boton,"active")){ //Si el boton no esta activado
+                   var desactivar_btn =document.querySelector(".active");
+                   if (desactivar_btn !== null){
+                       desactivar_btn.removeAttribute("class"); 
+                       desactivar_btn.disabled = false;
+                   }
+                   //Activo el botón
+                   boton.setAttribute("class","active");
+                   //Desactivo el boton para que no pueda ser pulsado
+                   boton.disabled =true;
+                   //Establezco el nuevo rumbo
+                   Walle.direction=rumbo;
+                   //Segun la dirección pongo a wally mirando a algún sitio
+                   document.getElementById(""+Walle.positionY.toString()+Walle.positionX.toString()).className="walle_"+rumbo;
+                   play('./sounds/move.mp3');
+               }else{
+                   alert("Ya es el rumbo actual");
+                   boton.removeAttribute("class");                   
+               }               
+            }
+            function move_walle (f_b){
+                //Incremento o decremento los valores de su posicion
+                Walle.move(f_b);
+                //Compuebo limite del planeta por si sobrepasa adecuarlos
+                Walle.check_planet_limit();
+                //Elimino el walle donde estaba
+                remove_walle();
+                //Lo muevo a la nueva posición con las coordenadas YX
+                document.getElementById(""+Walle.positionY.toString()+Walle.positionX.toString()).setAttribute("class","walle_"+Walle.direction); 
+                document.getElementById("move").play();
+            }            
+        </script>        
+    </head>
+    <body>
+        <header>
+            <h1>Mars rover the game!!</h1>
+        </header>
+        <!-- precarga de los sonidos para cuando hay prompt -->
+        <audio id="crash" src="./sounds/crash.mp3" preload="auto"></audio>
+        <audio id="move" src="./sounds/move.mp3" preload="auto"></audio>
+        <audio id="destroy" src="./sounds/destroy.mp3" preload="auto"></audio>
+
+        <article>
+            <section>
+                <table>                    
+                    <thead>
+                        <tr>
+                            <th colspan="10">Mars</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablero">
+                        <!-- La tabla se genera con javascript-->
+                    </tbody>
+                    
+                </table>
+            </section>
+            <section id="control">
+                <p>Control Panel</p>
+                <section id="rumbo">
+                   
+                    <div>
+                         <button id="North" type="button" onclick="cambiar_rumbo('North','N')">North</button>
+                    </div>
+                    <div>
+                        <button id="West" type="button" onclick="cambiar_rumbo('West','W')">west</button>
+                        <button id="East" class ="active" type="button" onclick="cambiar_rumbo('East','E')">East</button>
+                        
+                    </div>
+                    <div>
+                        <button id="South" type="button" onclick="cambiar_rumbo('South','S')">South</button>
+                    </div>
+                </section>
+                <section id="f_b">
+                    <div>
+                        <button type="button" onclick="move_walle('f')">Formward</button>
+                    </div>
+                    <div style="height: 50px"></div>
+                    <div>
+                        <button type="button" onclick="move_walle('b')">Back</button>
+                    </div>                  
+                </section>
+            </section>
+        </article>
+        <script>
+            generar_tablero("tablero");
+        </script>
+    </body>
+</html>

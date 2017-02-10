@@ -1,0 +1,110 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+body {
+   font-family: monospace;
+   background: url("..//images/m2.jpg") no-repeat center center fixed;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+   margin: 0 auto;
+   padding: 0 20%;
+}
+header {
+    text-align: center;
+    border: 1px solid black;
+    color: white;
+}
+table {
+    background: rgba(255,255,255,0.5);
+    width: 100%;
+    table-layout: fixed;
+    height: 50%;
+    border-collapse: collapse;
+    text-align: center;
+   
+}
+
+thead tr{
+    text-align: center;
+    height: 30px;
+}
+thead tr td{
+    text-align: center;
+    width: 100%;
+}
+tbody tr td {
+    height: 70px; /*Altura tabla*/
+    border: 1px solid black;
+    width: 10%; 
+   
+}
+#control {
+    margin-top: 25px;
+    border-bottom: 1px solid grey;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    text-align:center;
+    
+}
+#control p{
+    font-size: 30px;
+    border-bottom: 1px solid grey;
+    margin-bottom: 25px;
+    color: white;
+    
+}
+#control ul li {
+   list-style: none;
+   display: inline-block;
+   
+}
+#control ul li button{
+    height: 50px;
+    padding: 20px;
+}
+#control section{
+    display: inline-block;
+    margin-left:60px;
+}
+
+
+#control button{
+    height: 50px;
+    width: 100px;
+}
+#West{
+    margin-right: 98px;
+}
+#f_b {
+    display:block;
+}
+.walle_N, .walle_S, .walle_E, .walle_W, .stone{
+ width: 70px;
+ height: 70px;
+ background-repeat:no-repeat;
+ background-position: center;
+ background-size:70px 70px;
+}
+.walle_E{ 
+ background-image: url(..//images/walle_e.png);
+}
+.walle_N{ 
+ background-image: url(..//images/walle_n.png);
+}
+.walle_S{
+ background-image: url(..//images/walle_s.png);
+}
+.walle_W{
+ background-image: url(..//images/walle_w.png);
+}
+.active {
+    background-color: orange;
+}
+.stone {
+ background-image: url(..//images/stone70.png);
+}
+
+
